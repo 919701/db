@@ -25,8 +25,10 @@ where fare_conditions != 'Economy'
   and model ->> 'ru' = 'Аэробус A321-200'
 order by seat_no;
 
-
 --Вывести города в которых больше 1 аэропорта ( код аэропорта, аэропорт, город)
+select airport_code,airport_name->>'en' airport_name,city->>'en'
+from airports_data
+order by city;
 
 -- Найти ближайший вылетающий рейс из Екатеринбурга в Москву, на который еще не завершилась регистрация
 

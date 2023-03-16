@@ -26,7 +26,6 @@ where fare_conditions != 'Economy'
 order by seat_no;
 
 --Вывести города в которых больше 1 аэропорта ( код аэропорта, аэропорт, город)
---Вывести города в которых больше 1 аэропорта ( код аэропорта, аэропорт, город)
 with one_city as (select city ->> 'en' city
                   from airports_data
                   group by city
@@ -35,7 +34,6 @@ select airport_code,airport_name->>'en' airport_name,city->>'en'
 from airports_data
 where city ->> 'en' in (select city from one_city)
 order by city->>'en';
-
 
 -- Найти ближайший вылетающий рейс из Екатеринбурга в Москву, на который еще не завершилась регистрация
 

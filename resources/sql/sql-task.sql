@@ -49,6 +49,15 @@ where status in ('On Time','Departed')
 limit 1;
 
 --Вывести самый дешевый и дорогой билет и стоимость ( в одном результирующем ответе)
+(select *
+ from ticket_flights
+ order by amount desc
+ limit 1)
+union
+(select *
+ from ticket_flights
+ order by amount asc
+ limit 1);
 
 -- Написать DDL таблицы Customers , должны быть поля id , firstName, LastName, email , phone. Добавить ограничения на поля ( constraints) .
 

@@ -60,12 +60,36 @@ union
  limit 1);
 
 -- Написать DDL таблицы Customers , должны быть поля id , firstName, LastName, email , phone. Добавить ограничения на поля ( constraints) .
+CREATE TABLE Customers
+(
+    Id        serial
+        constraint Customers_Id primary key,
+    FirstName character varying(30)
+        constraint Customers_FirstName not null,
+    LastName  character varying(30)
+        constraint Customers_LastName not null,
+    Email     character varying(30)
+        constraint Customers_Email unique check ( Email != '' ),
+    Phone     INTEGER
+        constraint Customers_Phone unique check ( Phone != '')
+);
 
 -- Написать DDL таблицы Orders , должен быть id, customerId,	quantity. Должен быть внешний ключ на таблицу customers + ограничения
+CREATE TABLE Orders
+(
+    Id         serial
+        constraint Orders_Id primary key,
+    CustomerId integer
+        constraint Orders_CustomerId not null,
+    Quantity   integer
+        constraint Orders_Quantity check ( Quantity >= 0 ) default 0,
+    foreign key (CustomerId) references Customers (Id)
+);
 
 -- Написать 5 insert в эти таблицы
 
 -- удалить таблицы
+drop table customers;
 
 -- Написать свой кастомный запрос ( rus + sql)
 

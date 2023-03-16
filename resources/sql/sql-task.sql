@@ -95,14 +95,16 @@ values ('Ivan', 'Ivanov', 'ivan@mail.ru', '45691011'),
        ('Maksim', 'Sidorov', 'maksim@mail.ru', '42345891011');
 
 insert into Orders(CustomerId, Quantity)
-values ((select Id from Customers where LastName = 'Ivanov'),1),
-       ((select Id from Customers where LastName = 'Petrov'),2),
-       ((select Id from Customers where LastName = 'Svetlova'),3),
-       ((select Id from Customers where LastName = 'Ivanova'),4),
-       ((select Id from Customers where LastName = 'Sidorov'),5);
+values ((select Id from Customers where LastName = 'Ivanov'),55),
+       ((select Id from Customers where LastName = 'Petrov'),44),
+       ((select Id from Customers where LastName = 'Svetlova'),33),
+       ((select Id from Customers where LastName = 'Ivanova'),22),
+       ((select Id from Customers where LastName = 'Sidorov'),11);
 
 select * from Customers left join orders on Customers.Id = Orders.CustomerId;
+
 -- удалить таблицы
 drop table Orders,Customers;
 
 -- Написать свой кастомный запрос ( rus + sql)
+-- Вывести сколько было продано билетов бизнесс-класса на каждый самолет прилетающий (на дату) в Домодедово(Москва)

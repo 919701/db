@@ -70,8 +70,8 @@ CREATE TABLE Customers
         constraint Customers_LastName not null,
     Email     character varying(30)
         constraint Customers_Email unique check ( Email != '' ),
-    Phone     INTEGER
-        constraint Customers_Phone unique check ( Phone != '')
+    Phone     character varying(11) unique check ( Email != '' )
+        constraint Customers_Phone unique
 );
 
 -- Написать DDL таблицы Orders , должен быть id, customerId,	quantity. Должен быть внешний ключ на таблицу customers + ограничения
@@ -83,13 +83,26 @@ CREATE TABLE Orders
         constraint Orders_CustomerId not null,
     Quantity   integer
         constraint Orders_Quantity check ( Quantity >= 0 ) default 0,
-    foreign key (CustomerId) references Customers (Id)
+    foreign key (CustomerId) references Customers (Id) on delete cascade
 );
 
 -- Написать 5 insert в эти таблицы
+insert into Customers(FirstName, LastName, Email, Phone)
+values ('Ivan', 'Ivanov', 'ivan@mail.ru', '45691011'),
+       ('Petty', 'Petrov', 'petty@mail.ru', '22367891011'),
+       ('Sveta', 'Svetlova', 'sveta@mail.ru', '32345678011'),
+       ('Ira', 'Ivanova', 'ira@mail.ru', '92345678011'),
+       ('Maksim', 'Sidorov', 'maksim@mail.ru', '42345891011');
 
+insert into Orders(CustomerId, Quantity)
+values ((select Id from Customers where LastName = 'Ivanov'),1),
+       ((select Id from Customers where LastName = 'Petrov'),2),
+       ((select Id from Customers where LastName = 'Svetlova'),3),
+       ((select Id from Customers where LastName = 'Ivanova'),4),
+       ((select Id from Customers where LastName = 'Sidorov'),5);
+
+select * from Customers left join orders on Customers.Id = Orders.CustomerId;
 -- удалить таблицы
-drop table customers;
+drop table Orders,Customers;
 
 -- Написать свой кастомный запрос ( rus + sql)
-

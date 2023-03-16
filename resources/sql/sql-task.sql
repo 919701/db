@@ -1,11 +1,18 @@
 --Вывести к каждому самолету класс обслуживания и количество мест этого класса
-select aircraft_code, count(seat_no) total_seats, fare_conditions
+select aircraft_code, fare_conditions, count(seat_no) total_seats
 from seats
 group by aircraft_code, fare_conditions
 order by aircraft_code;
+
 --Найти 3 самых вместительных самолета (модель + кол-во мест)
+select aircraft_code,count(seat_no) total_seats
+from seats
+group by aircraft_code
+order by total_seats desc
+limit 3;
 
 --Вывести код,модель самолета и места не эконом класса для самолета 'Аэробус A321-200' с сортировкой по местам
+
 
 --Вывести города в которых больше 1 аэропорта ( код аэропорта, аэропорт, город)
 
